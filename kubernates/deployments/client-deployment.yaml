@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-app-react-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog-app-react-client
+  template:
+    metadata:
+      labels:
+        app: blog-app-react-client
+    spec:
+      containers:
+        - name: client
+          image: sen987/blog-app-client:latest
+          ports:
+            - containerPort: 5173
+      volumes:
+        - name: client-volume
+          hostPath:
+            path: ./frontend

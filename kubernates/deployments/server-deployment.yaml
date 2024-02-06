@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-app-node-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog-app-node-server
+  template:
+    metadata:
+      labels:
+        app: blog-app-node-server
+    spec:
+      containers:
+        - name: server
+          image: sen987/blog-app-server:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: NODE_ENV
+              value: development
+          volumeMounts:
+            - name: server-volume
+              mountPath: /usr/src/app
+      volumes:
+        - name: server-volume
+          hostPath:
+            path: ./backend

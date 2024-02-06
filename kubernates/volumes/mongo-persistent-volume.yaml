@@ -1,0 +1,4 @@
+volumes:
+  - name: mongo-volume
+    persistentVolumeClaim:
+      claimName: mongo-persistent-volume-claim
